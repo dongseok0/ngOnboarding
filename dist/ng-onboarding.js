@@ -161,7 +161,7 @@
                 if (scope.position === 'left' || scope.position === 'right') {
                   top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight / 2;
                 } else if (scope.position === 'bottom') {
-                  top = $attachTo.getBoundingClientRect().top + $attachTo.outerHeight() + yMargin;
+                  top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight + yMargin;
                 } else if (scope.position === 'top') {
                   bottom = window.innerHeight - $attachTo.getBoundingClientRect().top + yMargin;
                 }
