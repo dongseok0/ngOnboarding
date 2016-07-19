@@ -135,7 +135,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
           top = null
           bottom = null
           if scope.position == 'left' || scope.position == 'right'
-            top = $attachTo.getBoundingClientRect().top
+            top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight / 2
           else if scope.position == 'bottom'
             top = $attachTo.getBoundingClientRect().top + $attachTo.outerHeight() + yMargin
           else if scope.position == 'top'
