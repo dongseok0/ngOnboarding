@@ -142,7 +142,7 @@
                 } else if (scope.position === 'left') {
                   right = window.innerWidth - $attachTo.getBoundingClientRect().left + xMargin;
                 } else if (scope.position === 'top' || scope.position === 'bottom') {
-                  left = $attachTo.getBoundingClientRect().left;
+                  left = $attachTo.getBoundingClientRect().left + $attachTo.clientWidth / 2;
                 }
                 if (curStep['xOffset']) {
                   if (left !== null) {
