@@ -119,11 +119,15 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
           left = null
           right = null
           if scope.position == 'right'
-            left = $attachTo.getBoundingClientRect().left + $attachTo.offsetWidth + xMargin
+            left = $attachTo.getBoundingClientRect().right + xMargin
           else if scope.position == 'left'
             right = window.innerWidth - $attachTo.getBoundingClientRect().left + xMargin
           else if scope.position == 'top' || scope.position == 'bottom'
             left = $attachTo.getBoundingClientRect().left + $attachTo.clientWidth / 2
+            # Adjust X position if excess viewport
+            excessX = left + 100 - window.innerWidth
+            left = left - excessX if excessX > 0
+
           if curStep['xOffset']
             left = left + curStep['xOffset'] if left != null
             right = right - curStep['xOffset'] if right != null
@@ -137,7 +141,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
           if scope.position == 'left' || scope.position == 'right'
             top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight / 2
           else if scope.position == 'bottom'
-            top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight + yMargin
+            top = $attachTo.getBoundingClientRect().bottom + yMargin
           else if scope.position == 'top'
             bottom = window.innerHeight - $attachTo.getBoundingClientRect().top + yMargin
 

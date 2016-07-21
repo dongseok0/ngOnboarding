@@ -127,7 +127,7 @@
             }
           };
           return setupPositioning = function() {
-            var $attachTo, attachTo, bottom, left, right, top, xMargin, yMargin;
+            var $attachTo, attachTo, bottom, excessX, left, right, top, xMargin, yMargin;
             attachTo = document.querySelectorAll(curStep['attachTo'])[0];
             $attachTo = angular.element(attachTo)[0];
             scope.position = curStep['position'];
@@ -138,11 +138,15 @@
                 left = null;
                 right = null;
                 if (scope.position === 'right') {
-                  left = $attachTo.getBoundingClientRect().left + $attachTo.offsetWidth + xMargin;
+                  left = $attachTo.getBoundingClientRect().right + xMargin;
                 } else if (scope.position === 'left') {
                   right = window.innerWidth - $attachTo.getBoundingClientRect().left + xMargin;
                 } else if (scope.position === 'top' || scope.position === 'bottom') {
                   left = $attachTo.getBoundingClientRect().left + $attachTo.clientWidth / 2;
+                  excessX = left + 100 - window.innerWidth;
+                  if (excessX > 0) {
+                    left = left - excessX;
+                  }
                 }
                 if (curStep['xOffset']) {
                   if (left !== null) {
@@ -161,7 +165,7 @@
                 if (scope.position === 'left' || scope.position === 'right') {
                   top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight / 2;
                 } else if (scope.position === 'bottom') {
-                  top = $attachTo.getBoundingClientRect().top + $attachTo.clientHeight + yMargin;
+                  top = $attachTo.getBoundingClientRect().bottom + yMargin;
                 } else if (scope.position === 'top') {
                   bottom = window.innerHeight - $attachTo.getBoundingClientRect().top + yMargin;
                 }
